@@ -1,0 +1,55 @@
+apply plugin: 'com.bmuschko.cargo'
+
+defaultTasks = ['clean', 'build', 'apiTest']
+
+evaluationDependsOn(':service')
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.bmuschko:gradle-cargo-plugin:$gradleCargoPluginVersion"
+    }
+}
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse-wtp'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+cargo {
+
+    port = Integer.parseInt(cargoPort)
+
+    remote {
+        hostname = cargoHost
+    }
+
+    containerId = 'tomcat7x'
+    deployable {
+        file = project(':service').war.archivePath
+        context = '/contact-service'
+    }
+    local {
+        //homeDir = file("${rootProject.buildDir}/extract/apache-tomcat-7.0.57")
+        installer {
+            installUrl = tomcatTarballUrl
+            downloadDir = file("${rootProject.buildDir}/download")
+            extractDir = file("${rootProject.buildDir}/extract")
+        }
+    }
+}
+cargoRunLocal.dependsOn project(':service').assemble
+cargoStartLocal.dependsOn project(':service').assemble
+
+task wrapper(type: Wrapper) {
+    gradleVersion = gradleWrapperVersion
+}

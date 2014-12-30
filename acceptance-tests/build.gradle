@@ -1,0 +1,69 @@
+configurations {
+    cucumberRuntime {
+        extendsFrom testCompile
+    }
+}
+
+dependencies {
+    testCompile project(':service')
+    testCompile("com.jayway.restassured:rest-assured:${restAssuredVersion}") {
+        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+    }
+    testCompile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+    testCompile "org.springframework:spring-test:${springVersion}"
+
+    compile "org.codehaus.cargo:cargo-core-api-generic:$cargoCoreApiVersion"
+    compile "org.codehaus.cargo:cargo-core-container-tomcat:$cargoCoreContainerTomcatVersion"
+
+    compile "info.cukes:cucumber-core:$cucumberCoreVersion"
+    compile "info.cukes:cucumber-java:$cucumberJavaVersion"
+    compile "info.cukes:cucumber-junit:$cucumberJunitVersion"
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "ch.qos.logback:logback-classic:$logbackVersion"
+    compile "com.jayway.awaitility:awaitility:$awaitilityVersion"
+    compile "org.json:json:$jsonVersion"
+}
+
+sourceSets {
+    test {
+        java {
+            srcDir "src/main/api"
+        }
+    }
+}
+
+task apiTest() {
+    dependsOn testClasses
+    if (it.hasProperty("finalizedBy") && System.getenv('ENV_TYPE') != 'ci') {
+        dependsOn += ':cargoStartLocal'
+        finalizedBy ':cargoStopLocal'
+    }
+
+    doFirst {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            systemProperty 'TEST_LOG_FILE', testLogFile
+            systemProperty 'apiTest.baseUri', apiTestBaseUri
+            systemProperty 'apiTest.port', apiTestPort
+            if (cucumberFeature == "features") { //no feature defined on command line
+                args = ['-f', 'pretty',
+                        '-f', 'html:build/reports/api',
+                        '-f', 'junit:build/reports/component/api/junit.xml',
+                        '--glue', 'com.nisum.contact.api.resources',
+                        'src/main/api',
+                        '--tags', '~@pending',
+                        '--strict'
+                ]
+            } else {
+                args = ['-f', 'pretty',
+                        '-f', 'html:target/reports/component/api/html',
+                        '-f', 'junit:target/reports/component/api/junit.xml',
+                        '--glue', 'com.nisum.contact.api.resources',
+                        'src/main/api/com/nisum/contact/api/resources/' + cucumberFeature + '.feature'
+                ]
+            }
+        }
+    }
+}
+
