@@ -28,7 +28,7 @@ Feature: Contact Management service
       | fname | lname    | age | phoneNum     |
       | maria | testcase | 20  | 510-123-1234 |
     When I create contact
-    Then I get a 201 response code
+    Then the contact is created
     And I see the following values in response:
       | fname | lname    | age | phoneNum     |
       | maria | testcase | 20  | 510-123-1234 |
