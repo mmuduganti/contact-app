@@ -1,6 +1,6 @@
 apply plugin: 'com.bmuschko.cargo'
 
-defaultTasks = ['clean', 'build', 'apiTest']
+defaultTasks 'clean', 'test', 'apiTest'
 
 evaluationDependsOn(':service')
 
@@ -9,10 +9,20 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.bmuschko:gradle-cargo-plugin:$gradleCargoPluginVersion"
+        classpath "com.bmuschko:gradle-cargo-plugin:${gradleCargoPluginVersion}"
     }
 }
 
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+dependencies {
+    cargo "org.codehaus.cargo:cargo-core-uberjar:${cargoCoreApiVersion}",
+                "org.codehaus.cargo:cargo-ant:${cargoCoreApiVersion}"
+}
 
 subprojects {
     apply plugin: 'java'

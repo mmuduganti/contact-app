@@ -12,16 +12,16 @@ dependencies {
     testCompile "org.codehaus.groovy:groovy-all:${groovyVersion}"
     testCompile "org.springframework:spring-test:${springVersion}"
 
-    compile "org.codehaus.cargo:cargo-core-api-generic:$cargoCoreApiVersion"
-    compile "org.codehaus.cargo:cargo-core-container-tomcat:$cargoCoreContainerTomcatVersion"
+    compile "org.codehaus.cargo:cargo-core-api-generic:${cargoCoreApiVersion}"
+    compile "org.codehaus.cargo:cargo-core-container-tomcat:${cargoCoreContainerTomcatVersion}"
 
-    compile "info.cukes:cucumber-core:$cucumberCoreVersion"
-    compile "info.cukes:cucumber-java:$cucumberJavaVersion"
-    compile "info.cukes:cucumber-junit:$cucumberJunitVersion"
-    compile "org.slf4j:slf4j-api:$slf4jVersion"
-    compile "ch.qos.logback:logback-classic:$logbackVersion"
-    compile "com.jayway.awaitility:awaitility:$awaitilityVersion"
-    compile "org.json:json:$jsonVersion"
+    compile "info.cukes:cucumber-core:${cucumberCoreVersion}"
+    compile "info.cukes:cucumber-java:${cucumberJavaVersion}"
+    compile "info.cukes:cucumber-junit:${cucumberJunitVersion}"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "ch.qos.logback:logback-classic:${logbackVersion}"
+    compile "com.jayway.awaitility:awaitility:${awaitilityVersion}"
+    compile "org.json:json:${jsonVersion}"
 }
 
 sourceSets {
@@ -47,18 +47,18 @@ task apiTest() {
             systemProperty 'apiTest.baseUri', apiTestBaseUri
             systemProperty 'apiTest.port', apiTestPort
             if (cucumberFeature == "features") { //no feature defined on command line
-                args = ['-f', 'pretty',
-                        '-f', 'html:build/reports/api',
-                        '-f', 'junit:build/reports/component/api/junit.xml',
+                args = ['--plugin', 'pretty',
+                        '--plugin', 'html:build/reports/api',
+                        '--plugin', 'junit:build/reports/component/api/junit.xml',
                         '--glue', 'com.nisum.contact.api.resources',
                         'src/main/api',
                         '--tags', '~@pending',
                         '--strict'
                 ]
             } else {
-                args = ['-f', 'pretty',
-                        '-f', 'html:target/reports/component/api/html',
-                        '-f', 'junit:target/reports/component/api/junit.xml',
+                args = ['--plugin', 'pretty',
+                        '--plugin', 'html:target/reports/component/api/html',
+                        '--plugin', 'junit:target/reports/component/api/junit.xml',
                         '--glue', 'com.nisum.contact.api.resources',
                         'src/main/api/com/nisum/contact/api/resources/' + cucumberFeature + '.feature'
                 ]
