@@ -49,7 +49,7 @@ cargo {
         context = '/contact-service'
     }
     local {
-        //jvmArgs = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5055"
+        jvmArgs = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5055"
         //homeDir = file("${rootProject.buildDir}/extract/apache-tomcat-7.0.57")
         installer {
             installUrl = tomcatTarballUrl
