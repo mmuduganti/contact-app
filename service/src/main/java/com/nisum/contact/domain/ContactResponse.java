@@ -16,10 +16,7 @@ import java.util.Date;
 @JsonInclude(Include.NON_NULL)
 @ToString
 public class ContactResponse {
-    @JsonSerialize(using = JsonDateSerializer.class)
     private DateTime ts;
     private int httpStatus;
     private String errorMessage;
-
-
 }
