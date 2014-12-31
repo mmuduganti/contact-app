@@ -26,13 +26,10 @@ public class ContactController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> saveContact(
-            @RequestBody ContactRequest prepackRequest) {
-
+            @RequestBody ContactRequest contactRequest) {
         try {
-            log.debug("Prepack Service request: "
-                    + JsonUtility.getAsJSONString(prepackRequest));
             ContactResponse contactResponse = contactService
-                    .saveContact(prepackRequest);
+                    .saveContact(contactRequest);
             log.debug("Contact Service response: "
                     + JsonUtility.getAsJSONString(contactResponse));
             contactResponse.setHttpStatus(HttpStatus.OK.value());
