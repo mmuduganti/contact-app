@@ -11,6 +11,7 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonVersion}"
     compile "joda-time:joda-time:${jodaTimeVersion}"
     compile "org.hsqldb:hsqldb:${hsqlVersion}"
     compile "org.jasypt:jasypt:${jasyptVersion}"
