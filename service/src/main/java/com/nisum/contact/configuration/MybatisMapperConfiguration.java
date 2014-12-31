@@ -11,7 +11,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan("com.gap.sourcing.order.repository.mapper")
+@MapperScan("com.nisum.contact.repository.mapper")
 public class MybatisMapperConfiguration {
 
     @Bean

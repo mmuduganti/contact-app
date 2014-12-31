@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @EnableWebMvc
 @ComponentScan(
-        basePackages = {"com.gap.sourcing.order"},
+        basePackages = {"com.nisum.contact"},
         useDefaultFilters = false,
         includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Controller.class, Component.class, Repository.class})})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {

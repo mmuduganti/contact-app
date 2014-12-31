@@ -14,10 +14,10 @@ import javax.sql.DataSource;
 @Import(ApplicationProperties.class)
 public class DatabaseConfiguration {
 
-    private @Value("${tradestone.jdbc.driver}") String driverClassName;
-    private @Value("${tradestone.jdbc.url}") String url;
-    private @Value("${tradestone.jdbc.username}") String username;
-    private @Value("${tradestone.jdbc.password}") String password;
+    private @Value("${jdbc.driver}") String driverClassName;
+    private @Value("${jdbc.url}") String url;
+    private @Value("${jdbc.username}") String username;
+    private @Value("${jdbc.password}") String password;
 
     @Bean(name="dataSource")
     public DataSource dataSource() {
