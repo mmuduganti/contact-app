@@ -1,5 +1,6 @@
 package com.nisum.contact.controller;
 
+import com.nisum.contact.domain.Contact;
 import com.nisum.contact.domain.ContactRequest;
 import com.nisum.contact.domain.ContactResponse;
 import com.nisum.contact.service.ContactService;
@@ -13,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @Slf4j
 @RestController
+@RequestMapping("/contact")
 public class ContactController {
 
     @Autowired
     private ContactService contactService;
 
-    @RequestMapping(value = "/contact/save", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> saveContact(
             @RequestBody ContactRequest prepackRequest) {
 
@@ -41,6 +45,12 @@ public class ContactController {
         }
         return null;
 
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> listContacts() throws Exception {
+        List<Contact> contacts = contactService.retrieveContacts();
+        return new ResponseEntity<List<Contact>>(contacts, HttpStatus.OK);
     }
 
 }

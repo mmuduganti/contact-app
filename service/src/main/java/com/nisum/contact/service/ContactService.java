@@ -1,5 +1,6 @@
 package com.nisum.contact.service;
 
+import com.nisum.contact.domain.Contact;
 import com.nisum.contact.domain.ContactRequest;
 import com.nisum.contact.domain.ContactResponse;
 import com.nisum.contact.repository.ContactRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ContactService {
@@ -23,5 +25,9 @@ public class ContactService {
         contactResponse.setTs(new DateTime());
         return contactResponse;
 
+    }
+    
+    public List<Contact> retrieveContacts() throws Exception {
+        return contactRepository.retrieveContacts();
     }
 }
