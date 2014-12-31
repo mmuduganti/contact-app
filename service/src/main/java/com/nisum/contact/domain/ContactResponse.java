@@ -7,6 +7,7 @@ import com.nisum.contact.util.JsonDateSerializer;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.joda.time.DateTime;
 
 import java.util.Date;
 
@@ -16,7 +17,7 @@ import java.util.Date;
 @ToString
 public class ContactResponse {
     @JsonSerialize(using = JsonDateSerializer.class)
-    private Date ts;
+    private DateTime ts;
     private int httpStatus;
     private String errorMessage;
 
