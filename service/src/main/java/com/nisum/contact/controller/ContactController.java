@@ -33,6 +33,7 @@ public class ContactController {
 					.saveContact(prepackRequest);
 			log.debug("Contact Service response: "
 					+ JsonUtility.getAsJSONString(contactResponse));
+			contactResponse.setHttpStatus(HttpStatus.OK.value());
 			return new ResponseEntity<ContactResponse>(contactResponse,
 					HttpStatus.OK);
 		} catch (Exception exception) {
