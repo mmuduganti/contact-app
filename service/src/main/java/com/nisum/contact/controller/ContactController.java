@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value="/save", method = RequestMethod.POST)
     public ResponseEntity<?> saveContact(
             @RequestBody ContactRequest contactRequest) {
         try {
@@ -36,17 +33,16 @@ public class ContactController {
             return new ResponseEntity<ContactResponse>(contactResponse,
                     HttpStatus.OK);
         } catch (Exception exception) {
-            log.error(
+            log.info(
                     "Got an exception in ContactController and the cause is: %s",
                     exception.getMessage());
         }
         return null;
-
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> listContacts() throws Exception {
-        List<Contact> contacts = contactService.retrieveContacts();
+    @RequestMapping(value="/search", method = RequestMethod.GET)
+    public ResponseEntity<?> listContacts(@RequestParam("firstName") String firstName) throws Exception {
+        List<Contact> contacts = contactService.retrieveContacts(firstName);
         return new ResponseEntity<List<Contact>>(contacts, HttpStatus.OK);
     }
 

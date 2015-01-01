@@ -14,6 +14,8 @@ Feature: Contact Management service
   As a user
   I want to add/edit/view my contacts
 
+
+  Scenario: Create a contact
   # What is Scenario
   #To actually express the behavior we want, each feature contains several scenarios.
   #Each scenario is a single concrete example of how the system should
@@ -22,20 +24,41 @@ Feature: Contact Management service
 
   #Each scenario must make sense and be able to be executed independently of
   #any other scenario.
-   # Given I have the following details:
-    #  | fname | lname    | age | phoneNum     |
-     # | maria | testcase | 20  | 510-123-1234 |
-    #When I create contact
-    #Then the contact is created
-    #And I see the following values in response:
-     # | fname | lname    | age | phoneNum     |
-     # | maria | testcase | 20  | 510-123-1234 |
-     
-   Scenario Outline: Create contact
-    Given I have firstName <firstName>, lastName <lastName> and phoneNum <phoneNum>
+    Given I have the following details:
+      | firstName | lastName | phoneNum     |
+      | maria     | testcase | 510-123-1234 |
+    #Data Tables
+    #Sometimes steps in a scenario need to describe data that doesn’t easily fit on
+    #a single line of Given, When, or Then. Gherkin allows us to place these details in
+    #a table right underneath a step. Data tables give you a way to extend a Gherkin
+    #step beyond a single line to include a larger piece of data.
     When I create contact
     Then the contact is created
-	Then I see firstName <firstName>, lastName <lastName> and phoneNum <phoneNum> values in response
+    When I lookup contact with first name "maria"
+    And I see contact created with following values:
+      | firstName | lastName | phoneNum     |
+      | maria     | testcase | 510-123-1234 |
+
+
+  Scenario Outline: Create multiple contacts
+  #Sometimes you have several scenarios that follow exactly the same pattern
+  #of steps, just with different input values or expected outcomes.
+  #It is followed by Examples or Scenarios element
+    Given I have the following details:
+      | firstName | lastName | phoneNum   |
+      | <fname>   | <lname>  | <phoneNum> |
+        #Data Tables
+        #Sometimes steps in a scenario need to describe data that doesn’t easily fit on
+        #a single line of Given, When, or Then. Gherkin allows us to place these details in
+        #a table right underneath a step. Data tables give you a way to extend a Gherkin
+        #step beyond a single line to include a larger piece of data.
+    When I create contact
+    Then the contact is created
+    When I lookup contact with first name "<fname>"
+    And I see contact created with following values:
+      | firstName | lastName | phoneNum   |
+      | <fname>   | <lname>  | <phoneNum> |
+
   Examples:
-     | firstName | lastName  | phoneNum     |
-     | maria  	 | testcase	 | 510-123-1234	|
+    | fname | lname    | phoneNum     |
+    | janet | testcase | 510-123-1233 |

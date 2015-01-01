@@ -9,7 +9,6 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,7 +26,7 @@ public class ContactService {
 
     }
     
-    public List<Contact> retrieveContacts() throws Exception {
-        return contactRepository.retrieveContacts();
+    public List<Contact> retrieveContacts(String firstName) throws Exception {
+        return contactRepository.retrieveContacts(firstName);
     }
 }

@@ -15,5 +15,5 @@ public class ContactRequest {
 
     private String firstName;
     private String lastName;
-
+    private String phoneNum;
 }

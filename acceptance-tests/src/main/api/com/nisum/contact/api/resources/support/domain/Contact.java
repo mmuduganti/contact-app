@@ -1,15 +1,15 @@
-package com.nisum.contact.domain;
+package com.nisum.contact.api.resources.support.domain;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Created by mmuduganti on 12/31/14.
  */
-@Getter
 @Setter
+@Getter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class Contact {
     private String firstName;
     private String lastName;
