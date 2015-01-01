@@ -37,7 +37,7 @@ sample json request:
 {
  "firstName":"maria",
  "lastName":"testcase",
- "phoneNum","123-456-7890"
+ "phoneNum":"123-456-7890"
 }
 ```
 
