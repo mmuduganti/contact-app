@@ -20,17 +20,20 @@ Get started
 
 1) To launch api tests use the below command
 
+```
 ./gradlew apiTest -PcucumberFeature="features"
+```
 
 2) To access the application
 
+```
 ./gradlew cRL
-
-and the application can be accessed at http://localhost:8080/contact-service
+```
+and the application can be accessed at #http://localhost:8080/contact-service
 
 3) To add a contact
 
-POST to http://localhost:8080/contact-service/contact/save
+POST to #http://localhost:8080/contact-service/contact/save
 
 sample json request:
 ```json
@@ -43,4 +46,4 @@ sample json request:
 
 4) To search a contact
 
-GET to http://localhost:8080/contact-service/contact/search?firstName=<fname>
+GET to #http://localhost:8080/contact-service/contact/search?firstName=<fname>
