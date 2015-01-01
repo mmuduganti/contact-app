@@ -24,7 +24,7 @@ Get started
 ./gradlew apiTest -PcucumberFeature="features"
 ```
 
-2) To access the application
+2) To access the application 
 
 ```
 ./gradlew cRL
