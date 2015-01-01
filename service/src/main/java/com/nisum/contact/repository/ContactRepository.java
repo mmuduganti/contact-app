@@ -1,22 +1,20 @@
 package com.nisum.contact.repository;
 
-import com.nisum.contact.configuration.DatabaseConfiguration;
-import com.nisum.contact.configuration.MybatisMapperConfiguration;
-import com.nisum.contact.domain.Contact;
-import com.nisum.contact.domain.ContactRequest;
-import com.nisum.contact.repository.mapper.IContactMapper;
-import org.apache.ibatis.session.SqlSession;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.nisum.contact.domain.Contact;
+import com.nisum.contact.domain.ContactRequest;
+import com.nisum.contact.repository.mapper.IContactMapper;
 
 @Repository
 public class ContactRepository {
     @Autowired
     IContactMapper contactMapper;
     public void saveContact(ContactRequest request) throws Exception {
-        contactMapper.addContact(request.getFirstName(), request.getLastName());
+        contactMapper.addContact(request.getFirstName(), request.getLastName(),request.getPhoneNum());
     }
     
     public List<Contact> retrieveContacts() throws Exception {

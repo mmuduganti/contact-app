@@ -13,4 +13,5 @@ import lombok.ToString;
 public class Contact {
     private String firstName;
     private String lastName;
+    private String phoneNum;
 }
