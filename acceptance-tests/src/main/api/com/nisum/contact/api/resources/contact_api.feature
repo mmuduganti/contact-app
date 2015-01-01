@@ -62,3 +62,7 @@ Feature: Contact Management service
   Examples:
     | fname | lname    | phoneNum     |
     | janet | testcase | 510-123-1233 |
+
+  Scenarios:
+     | fname | lname    | phoneNum     |
+     | james | testcase | 510-123-1233 |
