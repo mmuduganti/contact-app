@@ -11,7 +11,7 @@ public final class ContactSelectProvider {
         return new SQL() {{
             SELECT("FIRST_NAME as firstName, LAST_NAME as lastName, PHONE_NUM as phoneNum");
             FROM("CONTACT");
-                WHERE("FIRST_NAME=#{firstName}");
+            WHERE("FIRST_NAME=#{firstName}");
         }}.toString();
     }
 }
